@@ -1,79 +1,61 @@
 package main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
 	
-	int ozer[] = {4, 1, 5};
-	int furkan[] = {3, 2, 5};
-	int gulay[] = {4, 8, 3};
-	static Map<String, ArrayList<Integer>> aliens = new HashMap<String, ArrayList<Integer>>();
-	static ArrayList<String> wordArrayList = new ArrayList<String>();
-	static ArrayList<String> lines = new ArrayList<String>();
-	//static String words[] = {"BFBZD", "BBZF", "ZBZD"};
-	static String words[] = {};
+	protected static Map<String, ArrayList<Integer>> smallAliens = new HashMap<String, ArrayList<Integer>>();
+	protected static Map<String, ArrayList<Integer>> largeAliens = new HashMap<String, ArrayList<Integer>>();
+	protected static ArrayList<String> smallWordList = new ArrayList<String>();
+	protected static ArrayList<String> largeWordList = new ArrayList<String>();
+	protected static String firstText;
+	protected static String secondText;
+	protected static String thirdText;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//String initText = "BBFFZBBFZZZBFBBZBZBBBBFFZFBFZZBBBZBFBBZBFFZZBBBBZZBBBFFBFBZDBFBZDBFBZDBFBZDZBZDZBZDZBZDZBZDZBZDBFBBBBFBFZBBBZBFZZBBBFBFZBBFBZBZZFBBZZBBZFFBBBBZBZZFZZFFFFBBBFFBFFFBZBFBBFFBBZFBBZF";
-		//System.out.println(Arrays.toString(firstTry(initText))); 
-		
-		aliens = ReadData.readCSV("small_aliens.csv", wordArrayList);
-		words = wordArrayList.toArray(new String[0]);
-		System.out.println("The Alien Map:\n" + aliens);
-		
-		String text = ReadData.readText("1.txt");
-		System.out.println(Arrays.toString(firstTry(text))); 
+		initValues();
+		runTests();
 	}
 	
-	public static int[] firstTry(String in) {
-		int res[] = {0, 0, 0};
+	public static void initValues() {
+		ReadData readData = new ReadData();
+		smallAliens = readData.readCSV("small_aliens.csv", smallWordList);
+		largeAliens = readData.readCSV("large_aliens.csv", largeWordList);
+		firstText = readData.readText("1.txt");
+		secondText = readData.readText("5.txt");
+		thirdText = readData.readText("10.txt");
+	
+	}	
+	
+	public static void runTests() {
+		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
+		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
+		String res1 = runAlgorithm(algo1);
+		Algorithm algo2 = new BruteForceAlgorithm(firstText, largeAliens, largeWordList);
+		String res2 = runAlgorithm(algo2);
+		finalStr += String.format("text1\t%s\t\t%s\n", res1,res2);
+		Algorithm algo3 = new BruteForceAlgorithm(secondText, smallAliens, smallWordList);
+		String res3 = runAlgorithm(algo3);
+		Algorithm algo4 = new BruteForceAlgorithm(secondText, largeAliens, largeWordList);
+		String res4 = runAlgorithm(algo4);
+		finalStr += String.format("text2\t%s\t%s\n", res3,res4);
+		Algorithm algo5 = new BruteForceAlgorithm(thirdText, smallAliens, smallWordList);
+		String res5 = runAlgorithm(algo5);
+		Algorithm algo6 = new BruteForceAlgorithm(thirdText, largeAliens, largeWordList);
+		String res6 = runAlgorithm(algo6);
+		finalStr += String.format("text3\t%s\t%s\n", res5,res6);
+		System.out.println(finalStr);
+	}
+	
+	public static String runAlgorithm(Algorithm algo) {
+		long start = System.currentTimeMillis();
+		String result = algo.run();
+		long finish = System.currentTimeMillis();
+		long timeElapsed = finish - start;
+		return "Match: " + result + ", Elapsed Time(ms): " + timeElapsed;
+	}
 
-		for(int j = 0; j<words.length;j++) {
-			String word = words[j];
-			int maxConsecCounter = 0;
-			int consecutiveCounter = 0;
-			
-			for(int i = 0; i<in.length();i++) {
-				if(checkIfNameMatch(in,i,word)) {
-					consecutiveCounter++;
-					if(consecutiveCounter>maxConsecCounter) {
-						maxConsecCounter = consecutiveCounter;
-					}
-					//ABCDHS 0 ABC 3
-					i += word.length() - 1;
-					
-				}else {
-					consecutiveCounter = 0;
-				}
-			}
-			res[j] = maxConsecCounter;
-		}
-		
-		
-		
-		return res;
-	}
-	
-	public static boolean checkIfNameMatch(String in, int begin, String word) {
-		int end = word.length();
-		boolean res = true;
-		
-		for(int i = 0;i < end;i++) {
-			if(begin+i<in.length() && (in.charAt(begin + i) != word.charAt(i))) {
-				res = false;
-			}
-
-		}
-		
-		return res;
-	}
-	
 
 
 }
