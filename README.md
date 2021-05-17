@@ -30,5 +30,20 @@ Text: abccbabccbaabccba
 The first implementation returns abccb<b>abccbaabccba</b>
 The second implementation returns <b>abccba</b>bccba<b>abccba</b>
 </pre>
+
+# Divide and Conquer
+
+<pre>
+Can we use DC to improve the complexity and have an correct solution? We could not figure out how to divide the text meaningfully, merge it and get the most
+consecutive word amount. However, while making brain storming we figured out how to solve a similiar problem with DC. The similiar problem is finding the most consecutive pre-determined character in a text. We cannot find consecutive words yet find characters using DC. 
+So our reasoning is this; if we can modify our problem to more simpler one and solve it by DC, we may improve the complexity.
+
+<b>Modification:</b>
+  To ease the understanding we will describe a simple data structure, however it can also be mimicked by index manipulations.
+  If we are searching a word with length m. We will going to divide the text into parts with length m. So we will have n/m parts. Call this parts as tokens.
+  Then if a token equals to word it will be 1 and otherwise 0.
+  So we end up modifying our problem 
+  
+</pre>
   
   
