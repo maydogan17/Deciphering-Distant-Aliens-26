@@ -29,22 +29,23 @@ public class Main {
 	}	
 	
 	public static void runTests() {
+		
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
-		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
+		Algorithm algo1 = new BitArrayAlgorithm(firstText, smallAliens, smallWordList);
 		String res1 = runAlgorithm(algo1);
-		Algorithm algo2 = new BruteForceAlgorithm(firstText, largeAliens, largeWordList);
+		Algorithm algo2 = new BitArrayAlgorithm(firstText, largeAliens, largeWordList);
 		String res2 = runAlgorithm(algo2);
 		finalStr += String.format("text1\t%s\t\t%s\n", res1,res2);
-		Algorithm algo3 = new BruteForceAlgorithm(secondText, smallAliens, smallWordList);
+		Algorithm algo3 = new BitArrayAlgorithm(secondText, smallAliens, smallWordList);
 		String res3 = runAlgorithm(algo3);
-		Algorithm algo4 = new BruteForceAlgorithm(secondText, largeAliens, largeWordList);
+		Algorithm algo4 = new BitArrayAlgorithm(secondText, largeAliens, largeWordList);
 		String res4 = runAlgorithm(algo4);
 		finalStr += String.format("text2\t%s\t%s\n", res3,res4);
-		Algorithm algo5 = new BruteForceAlgorithm(thirdText, smallAliens, smallWordList);
-		String res5 = runAlgorithm(algo5);
-		Algorithm algo6 = new BruteForceAlgorithm(thirdText, largeAliens, largeWordList);
-		String res6 = runAlgorithm(algo6);
-		finalStr += String.format("text3\t%s\t%s\n", res5,res6);
+//		Algorithm algo5 = new BitArrayAlgorithm(thirdText, smallAliens, smallWordList);
+//		String res5 = runAlgorithm(algo5);
+//		Algorithm algo6 = new BitArrayAlgorithm(thirdText, largeAliens, largeWordList);
+//		String res6 = runAlgorithm(algo6);
+//		finalStr += String.format("text3\t%s\t%s\n", res5,res6);
 		System.out.println(finalStr);
 	}
 	

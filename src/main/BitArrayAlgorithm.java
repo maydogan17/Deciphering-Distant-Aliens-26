@@ -34,7 +34,7 @@ public class BitArrayAlgorithm extends Algorithm {
 			}
 			occurList.add(maxOccurenceForWord);
 		}
-		String result = findAlienNameFromMap(wordOccurences);
+		String result = findAlienNameFromMap(occurList);
 		return result;
 		
 	}
@@ -42,13 +42,19 @@ public class BitArrayAlgorithm extends Algorithm {
 	private String extractCombinationsFromIndex(String word, int index) {
 		String bitString = "";
 		for(int i=index; i<text.length(); i=i+word.length()) {
-			String str = text.substring(i, i + word.length());
-			if(str.equals(word)) {
-				bitString += "1";
-			}else {
-				bitString += "0";
+			if(i+word.length() < text.length()) {
+				String str = text.substring(i, i + word.length());
+				if (str.equals(word)) {
+					bitString += "1";
+				} else {
+					if(bitString.equals("") || bitString.endsWith("1")) {
+						bitString += "0";
+					}
+				}
 			}
+			
 		}
+		System.out.println(bitString);
 		return bitString;
 	}
 	
