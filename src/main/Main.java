@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-	//skiplist?
+	
 	protected static Map<String, ArrayList<Integer>> smallAliens = new HashMap<String, ArrayList<Integer>>();
 	protected static Map<String, ArrayList<Integer>> largeAliens = new HashMap<String, ArrayList<Integer>>();
 	protected static ArrayList<String> smallWordList = new ArrayList<String>();
@@ -13,6 +13,7 @@ public class Main {
 	protected static String firstText;
 	protected static String secondText;
 	protected static String thirdText;
+	
 	public static void main(String[] args) {
 		initValues();
 		runTests();
@@ -29,6 +30,11 @@ public class Main {
 	}	
 	
 	public static void runTests() {
+//		SkiplistPrepareData p = new SkiplistPrepareData();
+//		p.getSkiplists(secondText);
+		
+		Algorithm alg = new SkipListAlgorithm(secondText, largeAliens, largeWordList);
+
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
 		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
 		String res1 = runAlgorithm(algo1);
