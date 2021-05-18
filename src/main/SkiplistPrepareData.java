@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SkiplistPrepareData {
@@ -7,6 +8,12 @@ public class SkiplistPrepareData {
 	int[] skiplistD;
 	int[] skiplistF;
 	int[] skiplistZ;
+	
+	ArrayList<Integer> poslistB= new ArrayList<Integer>();
+	ArrayList<Integer> poslistD= new ArrayList<Integer>();
+	ArrayList<Integer> poslistF= new ArrayList<Integer>();
+	ArrayList<Integer> poslistZ= new ArrayList<Integer>();
+	
 
 	public void getSkiplists(String text) {
 		skiplistB = new int[text.length()];
@@ -36,8 +43,31 @@ public class SkiplistPrepareData {
 			}
 
 		}
+		
+		for(int i = 0; i< skiplistB.length; i++) {
+			if(skiplistB[i] == 1) {
+				poslistB.add(i);
+			}
+		}
+		for(int i = 0; i< skiplistD.length; i++) {
+			if(skiplistD[i] == 1) {
+				poslistD.add(i);
+			}
+		}
+		for(int i = 0; i< skiplistF.length; i++) {
+			if(skiplistF[i] == 1) {
+				poslistF.add(i);
+			}
+		}
+		for(int i = 0; i< skiplistZ.length; i++) {
+			if(skiplistZ[i] == 1) {
+				poslistZ.add(i);
+			}
+		}
+		
+		
 
-		//System.out.println(Arrays.toString(skiplistZ));
+		//System.out.println(poslistD);
 	}
 
 	public void initializeSkipLists(String text) {
@@ -59,6 +89,22 @@ public class SkiplistPrepareData {
 			return skiplistF;
 		case 'Z':
 			return skiplistZ;
+		default:
+			return null;
+		}
+
+	}
+	
+	public ArrayList<Integer> getPosList(char a) {
+		switch (a) {
+		case 'B':
+			return poslistB;
+		case 'D':
+			return poslistD;
+		case 'F':
+			return poslistF;
+		case 'Z':
+			return poslistZ;
 		default:
 			return null;
 		}
