@@ -19,6 +19,8 @@ public class SkipListAlgorithm extends Algorithm{
 			String word = wordList.get(a);
 			int wordcount = 0;
 			int incount=0;
+			int max = 0;
+			boolean hasBefore = false;
 			for(int i=0; i<text.length(); i++) {
 				
 				for(int j=0; j<word.length(); j++) {
@@ -30,11 +32,20 @@ public class SkipListAlgorithm extends Algorithm{
 				}
 				if(incount==word.length()) {
 					wordcount++;
+					hasBefore = true;
+					i = i+word.length()-1;
+					if(wordcount > max) {
+						max = wordcount;
+					}
+				}
+				else {
+					wordcount = 0;
+					hasBefore = false;
 				}
 				incount = 0;
 			}
 			
-		vars.add(wordcount);
+		vars.add(max);
 		}
 		System.out.println(vars);
 		// using for-each loop for iteration over Map.entrySet()

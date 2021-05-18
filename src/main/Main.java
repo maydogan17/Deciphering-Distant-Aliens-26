@@ -33,7 +33,7 @@ public class Main {
 //		SkiplistPrepareData p = new SkiplistPrepareData();
 //		p.getSkiplists(secondText);
 		
-		Algorithm alg = new SkipListAlgorithm(secondText, largeAliens, largeWordList);
+		Algorithm alg = new SkipListAlgorithm(thirdText, largeAliens, largeWordList);
 
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
 		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
