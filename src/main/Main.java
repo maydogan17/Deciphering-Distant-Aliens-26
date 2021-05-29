@@ -29,6 +29,10 @@ public class Main {
 	}	
 	
 	public static void runTests() {
+		KMPAlgorithm kmp = new KMPAlgorithm(thirdText, largeAliens, largeWordList);
+		String res7 = runAlgorithm(kmp);
+		System.out.println(res7);
+		
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
 		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
 		String res1 = runAlgorithm(algo1);
@@ -49,11 +53,11 @@ public class Main {
 	}
 	
 	public static String runAlgorithm(Algorithm algo) {
-		long start = System.currentTimeMillis();
+		long start = System.nanoTime();
 		String result = algo.run();
-		long finish = System.currentTimeMillis();
-		long timeElapsed = finish - start;
-		return "Match: " + result + ", Elapsed Time(ms): " + timeElapsed;
+		long finish = System.nanoTime();
+		long timeElapsed = (finish - start)/1000;
+		return "Match: " + result + ", Elapsed Time(us): " + timeElapsed;
 	}
 
 
