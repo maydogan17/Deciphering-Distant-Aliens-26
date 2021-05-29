@@ -34,6 +34,9 @@ public class Main {
 //		p.getSkiplists(secondText);
 		
 		Algorithm alg = new SkipListAlgorithm(thirdText, largeAliens, largeWordList);
+		String res7 = runAlgorithm(alg);
+		System.out.println(res7);
+		//System.out.println(alg.run());
 
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
 		Algorithm algo1 = new BruteForceAlgorithm(firstText, smallAliens, smallWordList);
@@ -55,11 +58,11 @@ public class Main {
 	}
 	
 	public static String runAlgorithm(Algorithm algo) {
-		long start = System.currentTimeMillis();
+		long start = System.nanoTime();
 		String result = algo.run();
-		long finish = System.currentTimeMillis();
-		long timeElapsed = finish - start;
-		return "Match: " + result + ", Elapsed Time(ms): " + timeElapsed;
+		long finish = System.nanoTime();
+		long timeElapsed = (finish - start)/1000;
+		return "Match: " + result + ", Elapsed Time(us): " + timeElapsed;
 	}
 
 

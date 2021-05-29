@@ -8,7 +8,12 @@ public class SkipListAlgorithm extends Algorithm{
 	
 	public SkipListAlgorithm(String text, Map<String, ArrayList<Integer>> aliensMap, ArrayList<String> wordList) {
 		super(text, aliensMap, wordList);
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub        
+	}
+
+	@Override
+	public String run() {
+		// TODO Auto-generated method stub
 		ArrayList<Integer> vars = new ArrayList<Integer>();
 		
 		SkiplistPrepareData data = new SkiplistPrepareData();
@@ -50,14 +55,8 @@ public class SkipListAlgorithm extends Algorithm{
 		System.out.println(vars);
 		// using for-each loop for iteration over Map.entrySet()
         for (Map.Entry<String,ArrayList<Integer>> entry : aliensMap.entrySet()) {
-            if(entry.getValue().equals(vars)) System.out.println(entry.getKey());
+            if(entry.getValue().equals(vars)) return entry.getKey();
         }
-        
-	}
-
-	@Override
-	public String run() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
