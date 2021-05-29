@@ -78,11 +78,11 @@ public class Main {
 	
 	
 	public static String runAlgorithm(Algorithm algo) {
-		long start = System.currentTimeMillis();
+		long start = System.nanoTime();
 		String result = algo.run();
-		long finish = System.currentTimeMillis();
-		long timeElapsed = finish - start;
-		return "Match: " + result + ", Elapsed Time(ms): " + timeElapsed;
+		long finish = System.nanoTime();
+		long timeElapsed = (finish - start)/1000;
+		return "Match: " + result + ", Elapsed Time(us): " + timeElapsed;
 	}
 
 
