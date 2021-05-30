@@ -18,8 +18,10 @@ public class Main {
 	protected static String firstText;
 	protected static String secondText;
 	protected static String thirdText;
+
 	protected static String fourthText;
 	public static void main(String[] args) {
+
 		initValues();
 		runTests(SubStringAlgorithm.class);
 		System.out.println("");
