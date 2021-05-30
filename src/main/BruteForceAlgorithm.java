@@ -6,24 +6,21 @@ import java.util.Map;
 public class BruteForceAlgorithm extends Algorithm{
 
 	private ArrayList<Integer> wordOccurences = new ArrayList<>();
+	
 	public BruteForceAlgorithm(String text, Map<String, ArrayList<Integer>> aliensMap, ArrayList<String> wordList) {
 		super(text,aliensMap,wordList);
+		initValues();
 	}
-
-
-
 	
 	private void initValues() {
 		for(int i = 0; i < wordList.size(); i++) {
 			wordOccurences.add(0);
 		}
-		
 	}
 
 	// Time complexity is max(O(n.m),O(z.m))
 	@Override
 	public String run() {
-		initValues();
 		// O(z.m) z is length of text and m is number of words
 		for (int j = 0; j < wordList.size(); j++) {
 			String word = wordList.get(j);

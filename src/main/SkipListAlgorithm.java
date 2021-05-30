@@ -58,9 +58,12 @@ public class SkipListAlgorithm extends Algorithm{
 //        for (Map.Entry<String,ArrayList<Integer>> entry : aliensMap.entrySet()) {
 //            if(entry.getValue().equals(vars)) return entry.getKey();
 //        }
-
+		//z is the length of text
+		//m is the number of words
+		//n is the number of aliens
+		//t 
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		for(String s : wordList) {
+		for(String s : wordList) { //O(m * z/4) + O(m * z/)
 			ArrayList<Integer> lst =  data.getPosList(s.charAt(0));
 			ArrayList<Integer> pos = new ArrayList<Integer>();
 			
