@@ -28,46 +28,25 @@ public class SkiplistPrepareData {
 			switch (text.charAt(i)) {
 			case 'B':
 				skiplistB[i] = 1;
+				poslistB.add(i);
 				break;
 			case 'D':
 				skiplistD[i] = 1;
+				poslistD.add(i);
 				break;
 			case 'F':
 				skiplistF[i] = 1;
+				poslistF.add(i);
 				break;
 			case 'Z':
 				skiplistZ[i] = 1;
+				poslistZ.add(i);
 				break;
 			default:
 				break;
 			}
 
 		}
-		
-		for(int i = 0; i< skiplistB.length; i++) {
-			if(skiplistB[i] == 1) {
-				poslistB.add(i);
-			}
-		}
-		for(int i = 0; i< skiplistD.length; i++) {
-			if(skiplistD[i] == 1) {
-				poslistD.add(i);
-			}
-		}
-		for(int i = 0; i< skiplistF.length; i++) {
-			if(skiplistF[i] == 1) {
-				poslistF.add(i);
-			}
-		}
-		for(int i = 0; i< skiplistZ.length; i++) {
-			if(skiplistZ[i] == 1) {
-				poslistZ.add(i);
-			}
-		}
-		
-		
-
-		//System.out.println(poslistD);
 	}
 
 	public void initializeSkipLists(String text) {

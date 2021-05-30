@@ -23,9 +23,14 @@ public class Main {
 	public static void main(String[] args) {
 
 		initValues();
+		System.out.println("SubsString Algorithm\n");
 		runTests(SubStringAlgorithm.class);
-		System.out.println("");
+		System.out.println("BruteForce Algorithm\n");
 		runTests(BruteForceAlgorithm.class);
+		System.out.println("SkipList Algorithm\n");
+		runTests(SkipListAlgorithm.class);
+		System.out.println("KMP Algorithm\n");
+		runTests(KMPAlgorithm.class);
 	}
 	
 	public static void initValues() {
