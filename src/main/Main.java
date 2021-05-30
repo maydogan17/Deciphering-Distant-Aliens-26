@@ -15,6 +15,7 @@ public class Main {
 	protected static String thirdText;
 	
 	public static void main(String[] args) {
+
 		initValues();
 		runTests();
 	}
