@@ -84,9 +84,7 @@ public class SubStringAlgorithm extends Algorithm {
 	}
 	
 	private String findAlienNameFromMap(ArrayList<Integer> wordOcc) {
-		// O(n.m) if n is number of aliens and m is number of words
 		for(String key : aliensMap.keySet()) {
-			//O(m)
 			ArrayList<Integer> temp = aliensMap.get(key);
 			if(temp.equals(wordOcc)) {
 				return key;
