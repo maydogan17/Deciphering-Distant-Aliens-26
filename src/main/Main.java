@@ -26,17 +26,17 @@ public class Main {
 		initValues();
 		
 //		for(int i=0; i<5; i++) {
-//			System.out.println("SubsString Algorithm\n");
-//			runTests(SubStringAlgorithm.class);
-//			System.out.println("Naive Algorithm\n");
-//			runTests(NaiveAlgorithm.class);
-//			System.out.println("SkipList Algorithm\n");
-//			runTests(SkipListAlgorithm.class);
-//			System.out.println("KMP Algorithm\n");
-//			runTests(KMPAlgorithm.class);
+			System.out.println("SubsString Algorithm\n");
+			runTests(SubStringAlgorithm.class, "SubString");
+			System.out.println("Naive Algorithm\n");
+			runTests(NaiveAlgorithm.class, "Naive");
+			System.out.println("SkipList Algorithm\n");
+			runTests(SkipListAlgorithm.class, "SkipList");
+			System.out.println("KMP Algorithm\n");
+			runTests(KMPAlgorithm.class, "KMP");
 //			System.out.println("--------------------------");
 //		}
-		runTestsv2(NaiveAlgorithm.class, SubStringAlgorithm.class, SkipListAlgorithm.class, KMPAlgorithm.class);
+		//runTestsv2(NaiveAlgorithm.class, SubStringAlgorithm.class, SkipListAlgorithm.class, KMPAlgorithm.class);
 	}
 	
 	public static void initValues() {
@@ -50,8 +50,9 @@ public class Main {
 		fourthText = readData.readText("2.txt"); //the one with colliding word example
 	}	
 	
-	public static void runTests(Class algo) {
+	public static void runTests(Class algo, String name) {
 		Constructor constructor = null;
+		FileWriter csvWriter;
 		try {
 			constructor = algo.getConstructor(String.class, Map.class, ArrayList.class);
 		} catch (NoSuchMethodException | SecurityException e) {
@@ -59,30 +60,64 @@ public class Main {
 			System.out.println("Constructor error.");
 		}
 		try {
+			csvWriter = new FileWriter(name + ".csv");
+			csvWriter.append("test no");
+			csvWriter.append(";");
+			csvWriter.append(name);
+			csvWriter.append("\n");
 		String finalStr = "\tsmall aliens\t\t\t\tlarge aliens\n";
 		Algorithm algo1 = (Algorithm) constructor.newInstance(firstText, smallAliens, smallWordList);
-		String res1 = runAlgorithm(algo1);
+		String res1 = execTime(algo1);
+		csvWriter.append("test1");
+		csvWriter.append(";");
+		csvWriter.append(res1);
+		csvWriter.append("\n");
 		Algorithm algo2 = (Algorithm) constructor.newInstance(firstText, largeAliens, largeWordList);
-		String res2 = runAlgorithm(algo2);
+		String res2 = execTime(algo2);
+		csvWriter.append("test2");
+		csvWriter.append(";");
+		csvWriter.append(res2);
+		csvWriter.append("\n");
 		finalStr += String.format("text1\t%s\t\t%s\n", res1,res2);
 		Algorithm algo3 = (Algorithm) constructor.newInstance(secondText, smallAliens, smallWordList);
-		String res3 = runAlgorithm(algo3);
+		String res3 = execTime(algo3);
+		csvWriter.append("test3");
+		csvWriter.append(";");
+		csvWriter.append(res3);
+		csvWriter.append("\n");
 		Algorithm algo4 = (Algorithm) constructor.newInstance(secondText, largeAliens, largeWordList);
-		String res4 = runAlgorithm(algo4);
+		String res4 = execTime(algo4);
+		csvWriter.append("test4");
+		csvWriter.append(";");
+		csvWriter.append(res4);
+		csvWriter.append("\n");
 		finalStr += String.format("text2\t%s\t%s\n", res3,res4);
 		Algorithm algo5 = (Algorithm) constructor.newInstance(thirdText, smallAliens, smallWordList);
-		String res5 = runAlgorithm(algo5);
+		String res5 = execTime(algo5);
+		csvWriter.append("test5");
+		csvWriter.append(";");
+		csvWriter.append(res5);
+		csvWriter.append("\n");
 		Algorithm algo6 = (Algorithm) constructor.newInstance(thirdText, largeAliens, largeWordList);
-		String res6 = runAlgorithm(algo6);
+		String res6 = execTime(algo6);
+		csvWriter.append("test6");
+		csvWriter.append(";");
+		csvWriter.append(res6);
+		csvWriter.append("\n");
 		finalStr += String.format("text3\t%s\t%s\n", res5,res6);
 		finalStr += "\ttest aliens\n";
 		Algorithm algo7 = (Algorithm) constructor.newInstance(fourthText, testAliens, testWordList);
-		String res7 = runAlgorithm(algo7);
+		String res7 = execTime(algo7);
+		csvWriter.append("test7");
+		csvWriter.append(";");
+		csvWriter.append(res7);
+		csvWriter.append("\n");
 		finalStr += String.format("text4\t%s\t\n", res7);
 		System.out.println(finalStr);
-		
+		csvWriter.flush();
+		csvWriter.close();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+				| InvocationTargetException | IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -143,7 +178,6 @@ public class Main {
 			csvWriter.append("KMP");
 			csvWriter.append("\n");
 			
-			
 //			for(int i=0; i<30; i++) {
 //				bruteCount.set(0, bruteCount.get(0) + execTime((Algorithm) constructor1.newInstance(firstText, smallAliens, smallWordList)));
 //				subStringCount.set(0, subStringCount.get(0) + execTime((Algorithm) constructor2.newInstance(firstText, smallAliens, smallWordList)));
@@ -166,7 +200,7 @@ public class Main {
 			Algorithm algo3 = (Algorithm) constructor1.newInstance(firstText, smallAliens, smallWordList);
 			Algorithm algo4 = (Algorithm) constructor1.newInstance(firstText, smallAliens, smallWordList);
 			//for(int i=0; i<30; i++) {
-				csvWriter.append("text1");
+				csvWriter.append("test1");
 				csvWriter.append(";");
 				String output = execTime(algo1);
 				csvWriter.append(output);

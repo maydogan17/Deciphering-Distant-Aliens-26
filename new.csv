@@ -1,8 +1,8 @@
-test no;Naive;SubString;SkipList;KMP
-text1;173;78;80;90
-text2;270;516;348;294
-text3;4308;2305;1445;2270
-text4;7892;5848;1998;4982
-text5;1738;1587;701;1368
-text6;8939;7452;4798;6356
-text7;264;116;145;154
+test no;KMP
+test1;217
+test2;144
+test3;2632
+test4;4200
+test5;1858
+test6;2448
+test7;97
