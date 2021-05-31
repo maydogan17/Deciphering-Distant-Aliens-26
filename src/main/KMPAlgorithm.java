@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class KMPAlgorithm extends Algorithm{
+	//https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/
 	ArrayList<Integer> kmpList = new ArrayList<Integer>();
 
 	public KMPAlgorithm(String text, Map<String, ArrayList<Integer>> aliensMap, ArrayList<String> wordList) {

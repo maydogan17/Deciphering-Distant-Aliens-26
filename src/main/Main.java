@@ -31,6 +31,8 @@ public class Main {
 		runTests(SkipListAlgorithm.class);
 		System.out.println("KMP Algorithm\n");
 		runTests(KMPAlgorithm.class);
+		System.out.println("Naive Algorithm\n");
+		runTests(NaiveAlgorithm.class);
 	}
 	
 	public static void initValues() {
