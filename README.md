@@ -1,6 +1,6 @@
 # Deciphering-Distant-Aliens-26
 
-# First thoughts
+## First thoughts
 
 <pre>
 Firstly, we tried to come up with an algorith which works without bothering about complexity. Then we thought a brute force algorithm. This algorithm works like below;
@@ -19,8 +19,8 @@ After these processes, which takes O(k.n^2) worst time complexity, we will have 
 Then we can search this array in the given alien and word matrix and find the alien.
 This search in the matrix process takes O(k.j) time. Where j is the number of aliens.
 
-However, our implementation is not returning back to index after finding consecutive ones. When we first implemented it, we did not realize the problem. The problem
-here is because we are not going back to next index and we are continuing the index after consecutive words. To clarify the situation think the example at the top. 
+However, our implementation is not returning back to index after finding consecutive ones. When we first implemented it, we did not realize the problem. The
+problem is we are not going back to next index and we are continuing the index after consecutive words. To clarify the situation think the example at the top. 
 In described implementation we are turning back to 6th index. But in our implementation we are continuing with index 20. This later implementation is not correct.
 But its worst time complexity is not O(n^2) instead O(n).
 
@@ -31,11 +31,12 @@ The first implementation returns abccb<b>abccbaabccba</b>
 The second implementation returns <b>abccba</b>bccba<b>abccba</b>
 </pre>
 
-# Divide and Conquer
+## Divide and Conquer
 
 <pre>
 Can we use DC to improve the complexity and have an correct solution? We could not figure out how to divide the text meaningfully, merge it and get the most
-consecutive word amount. However, while making brain storming we figured out how to solve a similiar problem with DC. The similiar problem is finding the most consecutive pre-determined character in a text. We cannot find consecutive words, yet find characters using DC. 
+consecutive word amount. However, while making brain storming we figured out how to solve a similiar problem with DC. The similiar problem is finding the most
+consecutive pre-determined character in a text. We cannot find consecutive words, yet find characters using DC. 
 So our reasoning is this; if we can modify our problem to more simpler one and solve it by DC, we may improve the complexity.
 
 <b>Modification:</b>
@@ -65,7 +66,7 @@ So our reasoning is this; if we can modify our problem to more simpler one and s
   
 </pre>
 
-# Improvements on Brute Force and Substring Algorithm
+## Improvements on Brute Force and Substring Algorithm
 
 <pre>
 This tokenization gave us an idea. Instead of using divide and conquer we can adapt tokenization to brute force. As we mentioned brute force is fast when it does 
@@ -83,13 +84,14 @@ Please think the test case above. We will split text into tokens and each time w
 2: a,bcb,abc,abc => 0,0,1,1
 3: ab,cba,bca,bc => 0,0,0,0
 
-If we run the brute force algorithm, which does not turn back while searching as it is mentioned above, in each these cases, then we will get the maximun consequtive word numbers for each. Afterwards, we will choose the biggest one. 
+If we run the brute force algorithm, which does not turn back while searching as it is mentioned above, in each these cases, then we will get the maximum
+consequtive word numbers for each. Afterwards, we will choose the biggest one. 
 
 This approach will solve the problem with intersecting words and problem with tokens.
   
 </pre>
 
-# Time Complexities of Substring and Divide and Conquer
+## Time Complexities of Substring and Divide and Conquer
 
 <pre>
 In each of these algorithms we will use tokenization technique. Yet finding the most consequtive ones in these tokens is different. 
@@ -102,8 +104,44 @@ Substring: The brute force will check each token which takes O(1) and there is O
 
 If we think that we do this for every word and if we say that we have k number of words then the worst case time complexity is O(k.n).
 
-We does not include the token matching time. Because we calculated that if there were 2 distinct characters instead of 4, then the expected comparisons per token is 2. If we think it is 4 for text where 4 distinct characters used. The complexity will be multiplied with 4 which is constant and does not effect the complexity much.
+We does not include the token matching time. Because we calculated that if there were 2 distinct characters instead of 4, then the expected comparisons per token
+is 2. If we think it is 4 for text where 4 distinct characters used. The complexity will be multiplied with 4 which is constant and does not effect the complexity
+much.
   
 </pre>
   
+## Skiplist Algorithm (not the real Skiplist)
+
+<pre>
+We pretty convinced that in pattern maching we cannot do better than O(n). However, we are not trying to find all the matches, we just wanted to find most
+consequtive ones. Therefore we sought to ways to do better than O(k.n) in total. Skiplist algorithm inspired us to develop this algorithm. The idea here is 
+doing some prework and use this prework to be able to skip some part of the text.
+
+Firstly, we extracted the position list of each character in the text. This position list stores the positions of the character. 
+This will take O(n) space and O(n) time. 
+
+Then the algorithm is;
+Look up the first character of the word.
+Recurse in the characters position list.
+Go to the position in the text. (Position is the value of list.)
+Check if word matches.
+If word matches than we put this position into matched position list
+
+After recursion ends 
+Find the most consequtive ones in the matched position list.
+
+Example;
+word : ab
+text : abcbabca
+a's position list : 0,4,7
+recurse in the position list
+matched position list : 0,4
+max consequtive ones is 1
+
+
+This algorithm allows us to skip some of the text and it can be seen in the test runs. Yet it is not satisfying. 
+The complexity of skiplist is overall same O(k.n) time complexity with extra O(n) space complexity. 
+
+  
+</pre>
   
