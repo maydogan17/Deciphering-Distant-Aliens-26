@@ -35,7 +35,8 @@ The second implementation returns <b>abccba</b>bccba<b>abccba</b>
 
 <pre>
 Can we use DC to improve the complexity and have an correct solution? We could not figure out how to divide the text meaningfully, merge it and get the most
-consecutive word amount. However, while making brain storming we figured out how to solve a similiar problem with DC. The similiar problem is finding the most consecutive pre-determined character in a text. We cannot find consecutive words, yet find characters using DC. 
+consecutive word amount. However, while making brain storming we figured out how to solve a similiar problem with DC. The similiar problem is finding the most
+consecutive pre-determined character in a text. We cannot find consecutive words, yet find characters using DC. 
 So our reasoning is this; if we can modify our problem to more simpler one and solve it by DC, we may improve the complexity.
 
 <b>Modification:</b>
@@ -83,7 +84,8 @@ Please think the test case above. We will split text into tokens and each time w
 2: a,bcb,abc,abc => 0,0,1,1
 3: ab,cba,bca,bc => 0,0,0,0
 
-If we run the brute force algorithm, which does not turn back while searching as it is mentioned above, in each these cases, then we will get the maximun consequtive word numbers for each. Afterwards, we will choose the biggest one. 
+If we run the brute force algorithm, which does not turn back while searching as it is mentioned above, in each these cases, then we will get the maximum
+consequtive word numbers for each. Afterwards, we will choose the biggest one. 
 
 This approach will solve the problem with intersecting words and problem with tokens.
   
@@ -102,7 +104,9 @@ Substring: The brute force will check each token which takes O(1) and there is O
 
 If we think that we do this for every word and if we say that we have k number of words then the worst case time complexity is O(k.n).
 
-We does not include the token matching time. Because we calculated that if there were 2 distinct characters instead of 4, then the expected comparisons per token is 2. If we think it is 4 for text where 4 distinct characters used. The complexity will be multiplied with 4 which is constant and does not effect the complexity much.
+We does not include the token matching time. Because we calculated that if there were 2 distinct characters instead of 4, then the expected comparisons per token
+is 2. If we think it is 4 for text where 4 distinct characters used. The complexity will be multiplied with 4 which is constant and does not effect the complexity
+much.
   
 </pre>
   
