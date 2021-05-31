@@ -141,8 +141,6 @@ max consequtive ones is 1
 
 This algorithm allows us to skip some of the text and it can be seen in the test runs. Yet it is not satisfying. 
 The complexity of skiplist is overall same O(k.n) time complexity with extra O(n) space complexity. 
-Also we need to emphasize that in very distinctive case and an unlogical one, there is a possiblity that this algorithm will run in O(n^2) worst time complexity.
-For example, word: ab and text is ababababababababababababab
 
   
 </pre>
