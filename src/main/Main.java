@@ -25,14 +25,12 @@ public class Main {
 		initValues();
 		System.out.println("SubsString Algorithm\n");
 		runTests(SubStringAlgorithm.class);
-		System.out.println("BruteForce Algorithm\n");
-		runTests(BruteForceAlgorithm.class);
 		System.out.println("SkipList Algorithm\n");
 		runTests(SkipListAlgorithm.class);
 		System.out.println("KMP Algorithm\n");
 		runTests(KMPAlgorithm.class);
-		System.out.println("Naive Algorithm\n");
-		runTests(NaiveAlgorithm.class);
+		System.out.println("BruteForce Algorithm\n");
+		runTests(BruteForceAlgorithm.class);
 	}
 	
 	public static void initValues() {
