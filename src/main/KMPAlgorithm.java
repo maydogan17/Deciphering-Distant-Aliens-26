@@ -71,27 +71,36 @@ public class KMPAlgorithm extends Algorithm{
 	@Override
 	public String run() {
 		// TODO Auto-generated method stub
-		ArrayList<Integer> resultList = new ArrayList<Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		for(String word : wordList) {
 			KMPSearch(word, text);
-			int consec = 0;
-			int max = 0;
-			for(int i = 0; i<kmpList.size()-1;i++) {
-				if(kmpList.get(i+1)-kmpList.get(i) == word.length()) {
-					consec++;
-					if(consec > max) {
-						max = consec;
+			if(kmpList.size() == 0) {
+				result.add(0);
+			}
+			else if (kmpList.size() == 1) {
+				result.add(1);
+			}
+			else {
+				int consec = 0;
+				int max = 0;
+				for(int i = 0; i<kmpList.size()-1;i++) {
+					if(kmpList.get(i+1)-kmpList.get(i) == word.length()) {
+						consec++;
+						if(consec > max) {
+							max = consec;
+						}
+					}
+					else {
+						consec = 0;
 					}
 				}
-				else {
-					consec = 0;
-				}
+				
+				result.add(max+1);
 			}
-			resultList.add(max+1);
 			kmpList.clear();
 		}
 	     for (Map.Entry<String,ArrayList<Integer>> entry : aliensMap.entrySet()) {
-	            if(entry.getValue().equals(resultList)) return entry.getKey();
+	            if(entry.getValue().equals(result)) return entry.getKey();
 	        }
 		//System.out.println(resultList);
 		return "No Match";
