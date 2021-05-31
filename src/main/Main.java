@@ -1,10 +1,11 @@
 package main;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -23,14 +24,19 @@ public class Main {
 	public static void main(String[] args) {
 
 		initValues();
-		System.out.println("SubsString Algorithm\n");
-		runTests(SubStringAlgorithm.class);
-		System.out.println("BruteForce Algorithm\n");
-		runTests(BruteForceAlgorithm.class);
-		System.out.println("SkipList Algorithm\n");
-		runTests(SkipListAlgorithm.class);
-		System.out.println("KMP Algorithm\n");
-		runTests(KMPAlgorithm.class);
+		runTestsv2(NaiveAlgorithm.class, SubStringAlgorithm.class, SkipListAlgorithm.class, KMPAlgorithm.class);
+		for(int i=0; i<1; i++) {
+			System.out.println("SubsString Algorithm\n");
+			runTests(SubStringAlgorithm.class);
+			System.out.println("Naive Algorithm\n");
+			runTests(NaiveAlgorithm.class);
+			System.out.println("SkipList Algorithm\n");
+			runTests(SkipListAlgorithm.class);
+			System.out.println("KMP Algorithm\n");
+			runTests(KMPAlgorithm.class);
+			System.out.println("--------------------------");
+		}
+		
 	}
 	
 	public static void initValues() {
@@ -91,7 +97,269 @@ public class Main {
 		long timeElapsed = (finish - start)/1000;
 		return "Match: " + result + ", Elapsed Time(us): " + timeElapsed;
 	}
-	
-	
+	private static String execTime(Algorithm algo) {
+		long start = System.nanoTime();
+		String result = algo.run();
+		long finish = System.nanoTime();
+		long timeElapsed = (finish - start)/1000;
+		return String.valueOf(timeElapsed);
+		//return (int) timeElapsed;
+	}
+	public static void runTestsv2(Class algor1, Class algor2, Class algor3, Class algor4) {
+		Constructor constructor1 = null;
+		Constructor constructor2 = null;
+		Constructor constructor3 = null;
+		Constructor constructor4 = null;
+		ArrayList<Integer> bruteCount = new ArrayList<Integer>();
+		ArrayList<Integer> subStringCount = new ArrayList<Integer>();
+		ArrayList<Integer> skipListCount = new ArrayList<Integer>();
+		ArrayList<Integer> KMPCount = new ArrayList<Integer>();
+		for(int i=0; i<7; i++) {
+			bruteCount.add(0);
+			subStringCount.add(0);
+			skipListCount.add(0);
+			KMPCount.add(0);
+		}
+		FileWriter csvWriter;
+		try {
+			constructor1 = algor1.getConstructor(String.class, Map.class, ArrayList.class);
+			constructor2 = algor2.getConstructor(String.class, Map.class, ArrayList.class);
+			constructor3 = algor3.getConstructor(String.class, Map.class, ArrayList.class);
+			constructor4 = algor4.getConstructor(String.class, Map.class, ArrayList.class);
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			System.out.println("Constructor error.");
+		}
+		try {
+			csvWriter = new FileWriter("new.csv");
+			csvWriter.append("test no");
+			csvWriter.append(";");
+			csvWriter.append("Naive");
+			csvWriter.append(";");
+			csvWriter.append("SubString");
+			csvWriter.append(";");
+			csvWriter.append("SkipList");
+			csvWriter.append(";");
+			csvWriter.append("KMP");
+			csvWriter.append("\n");
+			
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(0, bruteCount.get(0) + execTime((Algorithm) constructor1.newInstance(firstText, smallAliens, smallWordList)));
+//				subStringCount.set(0, subStringCount.get(0) + execTime((Algorithm) constructor2.newInstance(firstText, smallAliens, smallWordList)));
+//				skipListCount.set(0, skipListCount.get(0) + execTime((Algorithm) constructor3.newInstance(firstText, smallAliens, smallWordList)));
+//				KMPCount.set(0, KMPCount.get(0) + execTime((Algorithm) constructor4.newInstance(firstText, smallAliens, smallWordList)));
+//			}
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text1");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(firstText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(firstText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(firstText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(firstText, smallAliens, smallWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			csvWriter.append(String.valueOf(bruteCount.get(0) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(0) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(0) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(0) / 30));
+//			csvWriter.append("\n");
+			
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(1, bruteCount.get(1) + execTime((Algorithm) constructor1.newInstance(firstText, largeAliens, largeWordList)));
+//				subStringCount.set(1, subStringCount.get(1) + execTime((Algorithm) constructor2.newInstance(firstText, largeAliens, largeWordList)));
+//				skipListCount.set(1, skipListCount.get(1) + execTime((Algorithm) constructor3.newInstance(firstText, largeAliens, largeWordList)));
+//				KMPCount.set(1, KMPCount.get(1) + execTime((Algorithm) constructor4.newInstance(firstText, largeAliens, largeWordList)));
+//			}
+//			csvWriter.append("text2");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(1) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(1) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(1) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(1) / 30));
+//			csvWriter.append("\n");
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text2");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(firstText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(firstText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(firstText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(firstText, largeAliens, largeWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(2, bruteCount.get(2) + execTime((Algorithm) constructor1.newInstance(secondText, smallAliens, smallWordList)));
+//				subStringCount.set(2, subStringCount.get(2) + execTime((Algorithm) constructor2.newInstance(secondText, smallAliens, smallWordList)));
+//				skipListCount.set(2, skipListCount.get(2) + execTime((Algorithm) constructor3.newInstance(secondText, smallAliens, smallWordList)));
+//				KMPCount.set(2, KMPCount.get(2) + execTime((Algorithm) constructor4.newInstance(secondText, smallAliens, smallWordList)));
+//			}
+//			csvWriter.append("text3");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(2) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(2) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(2) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(2) / 30));
+//			csvWriter.append("\n");
+			
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text3");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(secondText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(secondText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(secondText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(secondText, smallAliens, smallWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(3, bruteCount.get(3) + execTime((Algorithm) constructor1.newInstance(secondText, largeAliens, largeWordList)));
+//				subStringCount.set(3, subStringCount.get(3) + execTime((Algorithm) constructor2.newInstance(secondText, largeAliens, largeWordList)));
+//				skipListCount.set(3, skipListCount.get(3) + execTime((Algorithm) constructor3.newInstance(secondText, largeAliens, largeWordList)));
+//				KMPCount.set(3, KMPCount.get(3) + execTime((Algorithm) constructor4.newInstance(secondText, largeAliens, largeWordList)));
+//			}
+//			csvWriter.append("text4");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(3) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(3) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(3) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(3) / 30));
+//			csvWriter.append("\n");
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text4");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(secondText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(secondText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(secondText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(secondText, largeAliens, largeWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(4, bruteCount.get(4) + execTime((Algorithm) constructor1.newInstance(thirdText, smallAliens, smallWordList)));
+//				subStringCount.set(4, subStringCount.get(4) + execTime((Algorithm) constructor2.newInstance(thirdText, smallAliens, smallWordList)));
+//				skipListCount.set(4, skipListCount.get(4) + execTime((Algorithm) constructor3.newInstance(thirdText, smallAliens, smallWordList)));
+//				KMPCount.set(4, KMPCount.get(4) + execTime((Algorithm) constructor4.newInstance(thirdText, smallAliens, smallWordList)));
+//			}
+//			csvWriter.append("text5");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(4) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(4) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(4) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(4) / 30));
+//			csvWriter.append("\n");
+			
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text5");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(thirdText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(thirdText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(thirdText, smallAliens, smallWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(thirdText, smallAliens, smallWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(5, bruteCount.get(5) + execTime((Algorithm) constructor1.newInstance(thirdText, largeAliens, largeWordList)));
+//				subStringCount.set(5, subStringCount.get(5) + execTime((Algorithm) constructor2.newInstance(thirdText, largeAliens, largeWordList)));
+//				skipListCount.set(5, skipListCount.get(5) + execTime((Algorithm) constructor3.newInstance(thirdText, largeAliens, largeWordList)));
+//				KMPCount.set(5, KMPCount.get(5) + execTime((Algorithm) constructor4.newInstance(thirdText, largeAliens, largeWordList)));
+//			}
+//			csvWriter.append("text6");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(5) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(5) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(5) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(5) / 30));
+//			csvWriter.append("\n");
+			
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text6");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(thirdText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(thirdText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(thirdText, largeAliens, largeWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(thirdText, largeAliens, largeWordList)));
+				csvWriter.append("\n");
+			}
+			
+//			for(int i=0; i<30; i++) {
+//				bruteCount.set(6, bruteCount.get(6) + execTime((Algorithm) constructor1.newInstance(fourthText, testAliens, testWordList)));
+//				subStringCount.set(6, subStringCount.get(6) + execTime((Algorithm) constructor2.newInstance(fourthText, testAliens, testWordList)));
+//				skipListCount.set(6, skipListCount.get(6) + execTime((Algorithm) constructor3.newInstance(fourthText, testAliens, testWordList)));
+//				KMPCount.set(6, KMPCount.get(6) + execTime((Algorithm) constructor4.newInstance(fourthText, testAliens, testWordList)));
+//			}
+//			csvWriter.append("text7");
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(bruteCount.get(6) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(subStringCount.get(6) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(skipListCount.get(6) / 30));
+//			csvWriter.append(";");
+//			csvWriter.append(String.valueOf(KMPCount.get(6) / 30));
+//			csvWriter.append("\n");
+			
+			for(int i=0; i<30; i++) {
+				csvWriter.append("text7");
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor1.newInstance(fourthText, testAliens, testWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor2.newInstance(fourthText, testAliens, testWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor3.newInstance(fourthText, testAliens, testWordList)));
+				csvWriter.append(";");
+				csvWriter.append(execTime((Algorithm) constructor4.newInstance(fourthText, testAliens, testWordList)));
+				csvWriter.append("\n");
+			}
+			
+			csvWriter.flush();
+			csvWriter.close();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 
 }
