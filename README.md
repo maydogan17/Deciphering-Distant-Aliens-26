@@ -1,6 +1,6 @@
 # Deciphering-Distant-Aliens-26
 
-# First thoughts
+## First thoughts
 
 <pre>
 Firstly, we tried to come up with an algorith which works without bothering about complexity. Then we thought a brute force algorithm. This algorithm works like below;
@@ -19,8 +19,8 @@ After these processes, which takes O(k.n^2) worst time complexity, we will have 
 Then we can search this array in the given alien and word matrix and find the alien.
 This search in the matrix process takes O(k.j) time. Where j is the number of aliens.
 
-However, our implementation is not returning back to index after finding consecutive ones. When we first implemented it, we did not realize the problem. The problem
-here is because we are not going back to next index and we are continuing the index after consecutive words. To clarify the situation think the example at the top. 
+However, our implementation is not returning back to index after finding consecutive ones. When we first implemented it, we did not realize the problem. The
+problem is we are not going back to next index and we are continuing the index after consecutive words. To clarify the situation think the example at the top. 
 In described implementation we are turning back to 6th index. But in our implementation we are continuing with index 20. This later implementation is not correct.
 But its worst time complexity is not O(n^2) instead O(n).
 
@@ -31,7 +31,7 @@ The first implementation returns abccb<b>abccbaabccba</b>
 The second implementation returns <b>abccba</b>bccba<b>abccba</b>
 </pre>
 
-# Divide and Conquer
+## Divide and Conquer
 
 <pre>
 Can we use DC to improve the complexity and have an correct solution? We could not figure out how to divide the text meaningfully, merge it and get the most
@@ -66,7 +66,7 @@ So our reasoning is this; if we can modify our problem to more simpler one and s
   
 </pre>
 
-# Improvements on Brute Force and Substring Algorithm
+## Improvements on Brute Force and Substring Algorithm
 
 <pre>
 This tokenization gave us an idea. Instead of using divide and conquer we can adapt tokenization to brute force. As we mentioned brute force is fast when it does 
@@ -91,7 +91,7 @@ This approach will solve the problem with intersecting words and problem with to
   
 </pre>
 
-# Time Complexities of Substring and Divide and Conquer
+## Time Complexities of Substring and Divide and Conquer
 
 <pre>
 In each of these algorithms we will use tokenization technique. Yet finding the most consequtive ones in these tokens is different. 
@@ -110,4 +110,40 @@ much.
   
 </pre>
   
+## Skiplist Algorithm (not the real Skiplist)
+
+<pre>
+We pretty convinced that in pattern maching we cannot do better than O(n). However, we are not trying to find all the matches, we just wanted to find most
+consequtive ones. Therefore we sought to ways to do better than O(k.n) in total. Skiplist algorithm inspired us to develop this algorithm. The idea here is 
+doing some prework and use this prework to be able to skip some part of the text.
+
+Firstly, we extracted the position list of each character in the text. This position list stores the positions of the character. 
+This will take O(n) space and O(n) time. 
+
+Then the algorithm is;
+Look up the first character of the word.
+Recurse in the characters position list.
+Go to the position in the text. (Position is the value of list.)
+Check if word matches.
+If word matches than we put this position into matched position list
+
+After recursion ends 
+Find the most consequtive ones in the matched position list.
+
+Example;
+word : ab
+text : abcbabca
+a's position list : 0,4,7
+recurse in the position list
+matched position list : 0,4
+max consequtive ones is 1
+
+
+This algorithm allows us to skip some of the text and it can be seen in the test runs. Yet it is not satisfying. 
+The complexity of skiplist is overall same O(k.n) time complexity with extra O(n) space complexity. 
+Also we need to emphasize that in very distinctive case and an unlogical one, there is a possiblity that this algorithm will run in O(n^2) worst time complexity.
+For example, word: ab and text is ababababababababababababab
+
+  
+</pre>
   
