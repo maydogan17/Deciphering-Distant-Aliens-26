@@ -1,5 +1,40 @@
 # Deciphering-Distant-Aliens-26
 
+## How To Run
+
+<pre>
+Firstly, you can run all the algorithms we included or only the algorithm we decided to be best.
+Go to src->main->Main.java and there is a variable named TEST_ALL_ALGORITHMS, if you make its value true you can see the results of all algorithms.
+If you make it false then you can see only the final algorithms result.
+
+To run the program just run the Main.java
+
+How to read the result:
+
+The results are showed in table. In the rows there are different texts or sentences. In the columns there are different aliens.
+Their intersection is a test.
+
+For example;
+
+An example output :
+
+SkipList Algorithm
+
+	          small aliens				               large aliens
+text1	    Match: J, Elapsed Time(us): 310                 Match: No Match, Elapsed Time(us): 319
+text2	    Match: No Match, Elapsed Time(us): 1238	    <b>Match: Lavender, Elapsed Time(us): 2189</b>
+text3	    Match: No Match, Elapsed Time(us): 754	    Match: Albus, Elapsed Time(us): 2184
+	          test aliens
+text4	    Match: B, Elapsed Time(us): 110	
+
+The bold test case is done by using text2 (or medium sized text, text1 is smallest one and text3 is biggest) and by using large aliens.
+The result is Lavender which is indicated as match and the elapsed time in microseconds is given as 2189.
+
+The bottom line is another test case which we come up with. This test case is used to check if algorithm works in overlapping words.
+Overlapping words are described more in detail in the first thoughts section.
+
+</pre>
+
 ## First thoughts
 
 <pre>
@@ -29,6 +64,8 @@ Word: abccba
 Text: abccbabccbaabccba
 The first implementation returns abccb<b>abccbaabccba</b>
 The second implementation returns <b>abccba</b>bccba<b>abccba</b>
+
+Edit: We fixed the algorithm and works fine with the all cases.
 </pre>
 
 ## Divide and Conquer
@@ -143,5 +180,18 @@ This algorithm allows us to skip some of the text and it can be seen in the test
 The complexity of skiplist is overall same O(k.n) time complexity with extra O(n) space complexity. 
 
   
+</pre>
+
+## Further Improvements
+<pre>
+We always talked about how to improve the algorithm which find the most consequtive words. Yet there is another part of the problem.
+Which is finding the alien from the map.
+We implemented the most straightforward algorithm which takes O(j.k) where j is the number of aliens and k is the number of words.
+Which is way much smaller than O(k.n) so it does not change the resulting time complexity.
+However we can improve it further. We can use perfect hash tables. Because we first read the aliens from the cvs and do not insert or 
+delete items. It is possible. One can think that this maps value is an array with numbers but we can manipulate them and have a integer value map. 
+We will do it by hashing the array to get first value. Then hashing again to find the position.
+So that we can easily decrease it to O(1)
+
 </pre>
   
