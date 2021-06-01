@@ -26,13 +26,7 @@ public class SubStringAlgorithm extends Algorithm {
 			int maxConsecForWord = 0;
 			for(int i=0; i<word.length(); i++) {
 				int maxConsecForCombination = extractCombinationsFromIndex(word, i);
-				if(maxConsecForCombination > maxConsecForWord) maxConsecForWord = maxConsecForCombination;
-//				String bitArray = extractCombinationsFromIndex(word, i);
-//				int bitParse = Integer.parseInt(bitArray, 2);
-//				int maxConsecutive = maxConsecutiveOnes(bitParse);
-//				if(maxConsecutive > maxOccurenceForWord) {
-//					maxOccurenceForWord = maxConsecutive;
-//				}		
+				if(maxConsecForCombination > maxConsecForWord) maxConsecForWord = maxConsecForCombination;	
 			}
 			occurList.add(maxConsecForWord);
 		}
@@ -52,37 +46,12 @@ public class SubStringAlgorithm extends Algorithm {
 				}else {
 					count = 0;
 				}
-//				if (str.equals(word)) {
-//					bitString += "1";
-//				} else {
-//					if(bitString.equals("") || bitString.endsWith("1")) {
-//						bitString += "0";
-//					}
-//				}
 			}
-			
 		}
 
 		return maxConsec;
 	}
-	
-	private static int maxConsecutiveOnes(int x) {
-		// Initialize result
-		int count = 0;
-
-		// Count the number of iterations to
-		// reach x = 0.
-		while (x != 0) {
-			// This operation reduces length
-			// of every sequence of 1s by one.
-			x = (x & (x << 1));
-
-			count++;
-		}
-
-		return count;
-	}
-	
+		
 	private String findAlienNameFromMap(ArrayList<Integer> wordOcc) {
 		for(String key : aliensMap.keySet()) {
 			ArrayList<Integer> temp = aliensMap.get(key);
