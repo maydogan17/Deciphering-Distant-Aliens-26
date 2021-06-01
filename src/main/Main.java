@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+	
+	private static final boolean TEST_ALL_ALGORITHMS = true;
 
 	protected static Map<String, ArrayList<Integer>> smallAliens = new HashMap<String, ArrayList<Integer>>();
 	protected static Map<String, ArrayList<Integer>> largeAliens = new HashMap<String, ArrayList<Integer>>();
@@ -21,14 +23,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		initValues();
-		System.out.println("SubsString Algorithm\n");
-		runTests(SubStringAlgorithm.class);
-		System.out.println("SkipList Algorithm\n");
-		runTests(SkipListAlgorithm.class);
-		System.out.println("KMP Algorithm\n");
-		runTests(KMPAlgorithm.class);
-		System.out.println("BruteForce Algorithm\n");
-		runTests(BruteForceAlgorithm.class);
+		if(TEST_ALL_ALGORITHMS) {
+			System.out.println("SubsString Algorithm\n");
+			runTests(SubStringAlgorithm.class);
+			System.out.println("SkipList Algorithm\n");
+			runTests(SkipListAlgorithm.class);
+			System.out.println("KMP Algorithm\n");
+			runTests(KMPAlgorithm.class);
+			System.out.println("BruteForce Algorithm\n");
+			runTests(BruteForceAlgorithm.class);
+		}else {
+			System.out.println("SkipList Algorithm\n");
+			runTests(SkipListAlgorithm.class);
+		}
 	}
 
 	public static void initValues() {
