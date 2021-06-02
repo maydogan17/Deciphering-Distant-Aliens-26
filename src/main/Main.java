@@ -24,7 +24,7 @@ public class Main {
 	public static void main(String[] args) {
 		initValues();
 		if(TEST_ALL_ALGORITHMS) {
-			System.out.println("SubsString Algorithm\n");
+			System.out.println("SubString Algorithm\n");
 			runTests(SubStringAlgorithm.class);
 			System.out.println("SkipList Algorithm\n");
 			runTests(SkipListAlgorithm.class);
