@@ -175,10 +175,27 @@ recurse in the position list
 matched position list : 0,4
 max consequtive ones is 1
 
+We use straightforward way to find the max consequtive number from position list. We first look the first position and check if 
+the difference between position in index i (first position) and position in index i+1 is same with the lenght of word. 
+Then we increase the consequtiveness counter. If it is not the same then we reset the counter. We do this in for loop.
+
 
 This algorithm allows us to skip some of the text and it can be seen in the test runs. Yet it is not satisfying. 
 The complexity of skiplist is overall same O(k.n) time complexity with extra O(n) space complexity. 
 
+  
+</pre>
+
+
+## Better BruteForce
+
+<pre>
+After thinking about all of these we are inspired to develop more efficient bruteforce algorithm where we decrease the worst time complexity to
+O(k.n).
+In this algorithm we find the matches of words by iterating over the text one character by one and when we find the match, we store its position (index) into an array.
+Then we use the technique mentioned over in SkipList part to find the max consequtive number of occurences.
+
+We pay additional O(n) space complexity to decrease worst time complexity and it works slightly better than Substring algorithm.
   
 </pre>
 
@@ -192,6 +209,9 @@ However we can improve it further. We can use perfect hash tables. Because we fi
 delete items. It is possible. One can think that this maps value is an array with numbers but we can manipulate them and have a integer value map. 
 We will do it by hashing the array to get first value. Then hashing again to find the position.
 So that we can easily decrease it to O(1)
+
+Another improvement can be made in finding the most consequtive sequence of word amounts from the position list. In average, this list is very small compared to 
+actual text so it does not effect the complexity. Yet further optimizations may help improving the runtimes in final bruteforce algorithm and skiplist algorithm.
 
 </pre>
   
