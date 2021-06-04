@@ -220,12 +220,14 @@ actual text so it does not effect the complexity. Yet further optimizations may 
 ![comparison](https://user-images.githubusercontent.com/81180218/120789843-ccd1ab00-c53a-11eb-9b32-0b087dce8829.png)
 
 ## Complexity Table
-
+<pre>
 j: number of aliens
 n: length of text  
 m: length of word
 k: number of words
 j<<n & k<<n & m<<n
+</pre>
+ 
 
 ![complexities](https://user-images.githubusercontent.com/81180218/120790095-26d27080-c53b-11eb-8a42-baab51a43f9b.png)
 
