@@ -1,3 +1,4 @@
+
 # Deciphering-Distant-Aliens-26
 
 ## How To Run
@@ -214,4 +215,12 @@ Another improvement can be made in finding the most consequtive sequence of word
 actual text so it does not effect the complexity. Yet further optimizations may help improving the runtimes in final bruteforce algorithm and skiplist algorithm.
 
 </pre>
+
+## Runtime Comparison Chart
+![comparison](https://user-images.githubusercontent.com/81180218/120789843-ccd1ab00-c53a-11eb-9b32-0b087dce8829.png)
+
+## Complexity Table
+![complexities](https://user-images.githubusercontent.com/81180218/120790095-26d27080-c53b-11eb-8a42-baab51a43f9b.png)
+
+
   
