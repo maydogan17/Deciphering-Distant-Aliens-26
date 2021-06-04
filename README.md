@@ -225,8 +225,9 @@ j: number of aliens
 n: length of text  
 m: length of word
 k: number of words
-j<<n & k<<n & m<<n
 </pre>
+j<<n & k<<n & m<<n
+
  
 
 ![complexities](https://user-images.githubusercontent.com/81180218/120790095-26d27080-c53b-11eb-8a42-baab51a43f9b.png)
